@@ -1,3 +1,7 @@
+**Deprecated - please see [niksy/throttle-debounce](https://github.com/niksy/throttle-debounce) for newer version.**
+
+---
+
 # jQuery jQuery throttle / debounce: Sometimes, less is more! #
 [http://benalman.com/projects/jquery-throttle-debounce-plugin/](http://benalman.com/projects/jquery-throttle-debounce-plugin/)
 
