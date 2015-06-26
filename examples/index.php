@@ -35,7 +35,7 @@ function draw_shell() {
   <script type="text/javascript" src="<?= $base ?>../shared/ba-debug.js"></script>
   <?
   if ( $shell['jquery'] ) {
-    ?><script type="text/javascript" src="<?= $base ?>../shared/<?= $shell['jquery'] ?>"></script><?
+    ?><script type="text/javascript" src="<?= $base ?>../bower_components/jquery/dist/jquery.min.js"></script><?
   }
   
   ?><script type="text/javascript" src="<?= $base ?>../shared/SyntaxHighlighter/scripts/shCore.js"></script><?

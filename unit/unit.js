@@ -1,3 +1,6 @@
+/*jshint strict: false, -W030, -W032, -W033*/
+/*global QUnit, $, module, test, expect, stop, start*/
+
 // Not sure why this isn't set by default in qunit.js..
 QUnit.jsDump.HTML = false;
 
@@ -32,7 +35,7 @@ function exec_many_times( each, complete ) {
 
 module( '$.throttle' );
 
-test( 'delay, callback', function() {
+test( 'delay, callback', function (assert) {
   expect( 7 );
   stop();
   
@@ -43,8 +46,8 @@ test( 'delay, callback', function() {
       arr.push( now - this )
     },
     throttled = $.throttle( delay, fn );
-  
-  equals( throttled.guid, fn.guid, 'throttled-callback and callback should have the same .guid' );
+
+  assert.equal( throttled.guid, fn.guid, 'throttled-callback and callback should have the same .guid' );
   
   exec_many_times( function(){
     var now = +new Date();
@@ -56,9 +59,9 @@ test( 'delay, callback', function() {
     
     setTimeout(function(){
       //console.log( arr, arr.length, len, i );
-      ok( arr.length < i, 'callback should be executed less # of times than throttled-callback' );
-      equals( arr[0], 0, 'callback should be executed immediately' );
-      equals( arr.length - len, 1, 'callback should be executed one more time after finish' );
+      assert.ok( arr.length < i, 'callback should be executed less # of times than throttled-callback' );
+      assert.equal( arr[0], 0, 'callback should be executed immediately' );
+      assert.equal( arr.length - len, 1, 'callback should be executed one more time after finish' );
       
       start_time = null;
       arr = [];
@@ -70,7 +73,7 @@ test( 'delay, callback', function() {
   })
 });
 
-test( 'delay, false, callback', function() {
+test( 'delay, false, callback', function(assert) {
   expect( 7 );
   stop();
   
@@ -81,8 +84,8 @@ test( 'delay, false, callback', function() {
       arr.push( now - this )
     },
     throttled = $.throttle( delay, false, fn );
-  
-  equals( throttled.guid, fn.guid, 'throttled-callback and callback should have the same .guid' );
+
+  assert.equal( throttled.guid, fn.guid, 'throttled-callback and callback should have the same .guid' );
   
   exec_many_times( function(){
     var now = +new Date();
@@ -94,9 +97,9 @@ test( 'delay, false, callback', function() {
     
     setTimeout(function(){
       //console.log( arr, arr.length, len, i );
-      ok( arr.length < i, 'callback should be executed less # of times than throttled-callback' );
-      equals( arr[0], 0, 'callback should be executed immediately' );
-      equals( arr.length - len, 1, 'callback should be executed one more time after finish' );
+      assert.ok( arr.length < i, 'callback should be executed less # of times than throttled-callback' );
+      assert.equal( arr[0], 0, 'callback should be executed immediately' );
+      assert.equal( arr.length - len, 1, 'callback should be executed one more time after finish' );
       
       start_time = null;
       arr = [];
@@ -108,7 +111,7 @@ test( 'delay, false, callback', function() {
   })
 });
 
-test( 'delay, true, callback', function() {
+test( 'delay, true, callback', function(assert) {
   expect( 7 );
   stop();
   
@@ -119,8 +122,8 @@ test( 'delay, true, callback', function() {
       arr.push( now - this )
     },
     throttled = $.throttle( delay, true, fn );
-  
-  equals( throttled.guid, fn.guid, 'throttled-callback and callback should have the same .guid' );
+
+  assert.equal( throttled.guid, fn.guid, 'throttled-callback and callback should have the same .guid' );
   
   exec_many_times( function(){
     var now = +new Date();
@@ -132,9 +135,9 @@ test( 'delay, true, callback', function() {
     
     setTimeout(function(){
       //console.log( arr, arr.length, len, i );
-      ok( arr.length < i, 'callback should be executed less # of times than throttled-callback' );
-      equals( arr[0], 0, 'callback should be executed immediately' );
-      equals( arr.length - len, 0, 'callback should NOT be executed one more time after finish' );
+      assert.ok( arr.length < i, 'callback should be executed less # of times than throttled-callback' );
+      assert.equal( arr[0], 0, 'callback should be executed immediately' );
+      assert.equal( arr.length - len, 0, 'callback should NOT be executed one more time after finish' );
       
       start_time = null;
       arr = [];
@@ -149,7 +152,7 @@ test( 'delay, true, callback', function() {
 
 module( '$.debounce' );
 
-test( 'delay, callback', function() {
+test( 'delay, callback', function(assert) {
   expect( 5 );
   stop();
   
@@ -160,8 +163,8 @@ test( 'delay, callback', function() {
       arr.push( +new Date() )
     },
     debounced = $.debounce( delay, fn );
-  
-  equals( debounced.guid, fn.guid, 'throttled-callback and callback should have the same .guid' );
+
+  assert.equal( debounced.guid, fn.guid, 'throttled-callback and callback should have the same .guid' );
   
   exec_many_times( function(){
     start_time = start_time || +new Date();
@@ -173,8 +176,8 @@ test( 'delay, callback', function() {
     
     setTimeout(function(){
       //console.log( arr[0] - done_time );
-      equals( arr.length, 1, 'callback was executed once' );
-      ok( arr[0] >= done_time, 'callback should be executed after the finish' );
+      assert.equal( arr.length, 1, 'callback was executed once' );
+      assert.ok( arr[0] >= done_time, 'callback should be executed after the finish' );
       
       start_time = null;
       arr = [];
@@ -186,7 +189,7 @@ test( 'delay, callback', function() {
   })
 });
 
-test( 'delay, false, callback', function() {
+test( 'delay, false, callback', function(assert) {
   expect( 5 );
   stop();
   
@@ -197,8 +200,8 @@ test( 'delay, false, callback', function() {
       arr.push( +new Date() )
     },
     debounced = $.debounce( delay, false, fn );
-  
-  equals( debounced.guid, fn.guid, 'throttled-callback and callback should have the same .guid' );
+
+  assert.equal( debounced.guid, fn.guid, 'throttled-callback and callback should have the same .guid' );
   
   exec_many_times( function(){
     start_time = start_time || +new Date();
@@ -210,8 +213,8 @@ test( 'delay, false, callback', function() {
     
     setTimeout(function(){
       //console.log( arr[0] - done_time );
-      equals( arr.length, 1, 'callback was executed once' );
-      ok( arr[0] >= done_time, 'callback should be executed after the finish' );
+      assert.equal( arr.length, 1, 'callback was executed once' );
+      assert.ok( arr[0] >= done_time, 'callback should be executed after the finish' );
       
       start_time = null;
       arr = [];
@@ -223,7 +226,7 @@ test( 'delay, false, callback', function() {
   })
 });
 
-test( 'delay, true, callback', function() {
+test( 'delay, true, callback', function(assert) {
   expect( 5 );
   stop();
   
@@ -234,8 +237,8 @@ test( 'delay, true, callback', function() {
       arr.push( +new Date() )
     },
     debounced = $.debounce( delay, true, fn );
-  
-  equals( debounced.guid, fn.guid, 'throttled-callback and callback should have the same .guid' );
+
+  assert.equal( debounced.guid, fn.guid, 'throttled-callback and callback should have the same .guid' );
   
   exec_many_times( function(){
     start_time = start_time || +new Date();
@@ -246,8 +249,8 @@ test( 'delay, true, callback', function() {
     
     setTimeout(function(){
       //console.log( arr[0] - start_time );
-      equals( arr.length, 1, 'callback was executed once' );
-      ok( arr[0] - start_time <= 5, 'callback should be executed at the start' );
+      assert.equal( arr.length, 1, 'callback was executed once' );
+      assert.ok( arr[0] - start_time <= 5, 'callback should be executed at the start' );
       
       start_time = null;
       arr = [];
