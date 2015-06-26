@@ -16,6 +16,7 @@
   "private": true,
   "ignore": [
     "**/.*",
+    "Gruntfile.js",
     "node_modules",
     "bower_components",
     "test",
